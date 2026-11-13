@@ -1,0 +1,116 @@
+% ----------------------- TODO ---------------------------
+% Diese Daten müssen pro Blatt angepasst werden:
+% Number = Übungsblatt-Nummer
+\newcommand{\NUMBER}{4}
+\newcommand{\EXERCISES}{2}
+\newcommand{\DEADLINE}{17.11.2026}
+% Diese Daten müssen einmalig pro Vorlesung angepasst werden:
+\newcommand{\COURSE}{ISML}
+\newcommand{\STUDENTA}{Aron Wichtner\\ Mat.Nr:  6389288}
+\newcommand{\STUDENTB}{Colin Zach\\ Mat.Nr:  7782518}
+% ----------------------- TODO ---------------------------
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{pdflscape}
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{polynom}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{forloop}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{fancybox}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage[english]{babel}
+\usepackage[normalem]{ulem}
+
+
+%Commands _____________________________________________________
+
+\newcommand{\rem}[1]{\textcolor{red}{\sout{#1}}}
+
+
+
+%______________________________________________________________
+%Größe der Ränder setzen
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Kopf- und Fußzeile
+\pagestyle {fancy}
+\fancyhead[C]{\COURSE}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage /\pageref*{LastPage}}
+
+%Formatierung der Überschrift, hier nichts ändern
+\def\header#1#2{
+  \begin{center}
+    {\Large Assignment #1}\\
+    {(Submission date: #2)}
+  \end{center}
+}
+
+
+
+%-------------- DOCUMENT ---------------
+\begin{document}
+
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+    \STUDENTA\\
+    \STUDENTB\\
+\end{tabularx}
+\header{Nr. \NUMBER}{\DEADLINE}
+
+\section*{1}
+
+\subsection*{1a)}
+
+Start here
+
+% example figure
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{"../src/Residual_plot_task1_a.pdf"}
+    \caption{Residual plot with fitted values of mpg on the x axis and the residuals on the y axis. The data follows a u-shaped pattern which indicates non-linearity.}
+    \label{fig:residual_plot_1a}
+\end{figure}
+
+% example table
+\begin{table}[ht]
+  \centering
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lccccc}
+      \hline
+      & Linear model & Interactions only & Log transformation & Square root transformation & Squared transformation \\ \hline
+      $R^2$ & 0.821 & 0.865 & 0.866 & 0.867 & 0.869 \\ \hline
+      cylinders & 0.128 & 0.591 & 0.433 & 0.378 & 0.266 \\
+      displacement & 0.008 & 0.124 & 0.009 & 0.004 & 0.004 \\
+      horsepower & 0.220 & 0.002 & $4.681 \times 10^{-4}$ & $2.211 \times 10^{-4}$ & $2.866 \times 10^{-5}$ \\
+      weight & $7.875 \times 10^{-21}$ & 0.963 & 0.630 & 0.580 & 0.609 \\
+      acceleration & 0.415 & 0.111 & 0.287 & 0.338 & 0.426 \\
+      year & $3.056 \times 10^{-39}$ & $2.015 \times 10^{-20}$ & $1.403 \times 10^{-20}$ & $1.589 \times 10^{-20}$ & $3.824 \times 10^{-20}$ \\
+      origin & $4.666 \times 10^{-7}$ & 0.002 & 0.029 & 0.044 & 0.063 \\
+      displacement (transformed) & -- & -- & 0.033 & 0.009 & $3.976 \times 10^{-4}$ \\
+      cylinders:weight & -- & $9.321 \times 10^{-12}$ & 0.006 & 0.016 & 0.019 \\
+      cylinders:year & -- & 0.149 & 0.187 & 0.187 & 0.156 \\
+      weight:year & -- & 0.137 & 0.112 & 0.114 & 0.145 \\ \hline
+    \end{tabular}
+  }
+  \caption{Comparison of $R^2$ values and predictor p-values across the linear model without interactions or transformations, the model with interactions only, and the three models with a transformation of displacement. In the transformed models, the row ``displacement'' is the original term and ``displacement (transformed)'' the added one.}
+  \label{tab:transformation_comparison}
+\end{table}
+
+\newpage
+\section*{2}
+
+\end{document}
