@@ -75,39 +75,172 @@
 
 \subsection*{1a)}
 
-Start here
+Table \ref{tab:data_sizes} shows a comparison of the different dataset sizes.
+After splitting the data into training and test set, the training set had 3340 observations whereas the test set had 1169 observations.
+After getting rid of all observations which did not have a response value "aa" or "ao" the number of observations decreased to 1278 and 439 for the training and test set respectively.
+The number of columns was 257 in all datasets. The columns did not inlcude "speaker" or "row number". 
 
-% example figure
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{"../src/Residual_plot_task1_a.pdf"}
-    \caption{Residual plot with fitted values of mpg on the x axis and the residuals on the y axis. The data follows a u-shaped pattern which indicates non-linearity.}
-    \label{fig:residual_plot_1a}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lcc}
+    \hline
+    Data set & Data points & Variables \\ \hline
+    Training set (all classes) & 3340 & 257 \\
+    Test set (all classes) & 1169 & 257 \\
+    Training set (aa and ao) & 1278 & 257 \\
+    Test set (aa and ao) & 439 & 257 \\ \hline
+  \end{tabular}
+  \caption{Sizes of the training and test sets after excluding the row number and speaker columns, before and after restricting the data to the classes aa and ao. The 257 variables consist of the response g and the 256 other features.}
+  \label{tab:data_sizes}
+\end{table}
+
+\subsection*{1b)}
+
+- removing all observations but the ones with response aa and ao implies that the model is doing simple log reg with only 2 classes.
+- A trehshold of 0.5 means that the predicted probabilites are mapped to ao if larger then 0.5 and mapped to aa if smaller.
+- the accuracy describes the fraction of all correctly predicted classes
+- the train acc with 0.9069 is very high whereas the test acc is lower with 0.7563 see table \ref{tab:logistic_regression_accuracy}
+- It is larger because the model was trained on that data and also trained to fit the noise -> overfitted
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lcc}
+    \hline
+    Model & Train accuracy & Test accuracy \\ \hline
+    Logistic regression ($t = 0.5$) & 0.9069 & 0.7563 \\ \hline
+  \end{tabular}
+  \caption{Train and test accuracy of the logistic regression model on the two-class subset (aa and ao) with classification threshold $t = 0.5$.}
+  \label{tab:logistic_regression_accuracy}
+\end{table}
+
+\subsection*{1c)}
+
+- see table \ref{tab:lda_accuracy}
+- train acc decreses
+- trest acc increases
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lcc}
+    \hline
+    Model & Train accuracy & Test accuracy \\ \hline
+    LDA & 0.8936 & 0.7859 \\ \hline
+  \end{tabular}
+  \caption{Train and test accuracy of the LDA model on the two-class subset (aa and ao).}
+  \label{tab:lda_accuracy}
+\end{table}
+
+\subsection*{1d)}
+
+- confusion matrix (see \ref{tab:confusion_matrices_aa_ao}) shows which prediction values were classified correctly and which wrong.
+- It shows the TP, FP, FN and TN.
+- deviatioins from the diagonal generally speak agianst the model.
+- Log reg and lda both predicted the same amount of TP 121 and FN 55
+- LDA predicted less FP 39 and more TN 224
+- difference overall small
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lcc}
+    \multicolumn{3}{c}{Logistic regression} \\
+    \hline
+    predicted $\backslash$ actual & aa & ao \\ \hline
+    aa & 121 & 52 \\
+    ao & 55 & 211 \\ \hline
+  \end{tabular}
+  \qquad
+  \begin{tabular}{lcc}
+    \multicolumn{3}{c}{LDA} \\
+    \hline
+    predicted $\backslash$ actual & aa & ao \\ \hline
+    aa & 121 & 39 \\
+    ao & 55 & 224 \\ \hline
+  \end{tabular}
+  \caption{Confusion matrices on the two-class test data (aa and ao) for the logistic regression model (left) and the LDA model (right).}
+  \label{tab:confusion_matrices_aa_ao}
+\end{table}
+
+\subsection*{1e)}
+
+- lda model trained on all phonemes means there are now more then two classes
+- train acc 0.944  and test acc 0.9196 \ref{tab:lda_full_accuracy} are a lot better especially the test accuracy -> why?
+- confusion matrix has larger values on the diagonal (besides ao ao in lda of subset)
+- less falsely predicted ao which were actually aa -> why
+- other phenomes very well predicted 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lcc}
+    \hline
+    Model & Train accuracy & Test accuracy \\ \hline
+    LDA (all five classes) & 0.944 & 0.9196 \\ \hline
+  \end{tabular}
+  \caption{Train and test accuracy of the LDA model fitted on the full training set (all five phonemes).}
+  \label{tab:lda_full_accuracy}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lccccc}
+    \hline
+    predicted $\backslash$ actual & aa & ao & dcl & iy & sh \\ \hline
+    aa & 129 & 39 & 0 & 0 & 0 \\
+    ao & 47 & 223 & 0 & 0 & 0 \\
+    dcl & 0 & 0 & 190 & 2 & 0 \\
+    iy & 0 & 1 & 5 & 309 & 0 \\
+    sh & 0 & 0 & 0 & 0 & 224 \\ \hline
+  \end{tabular}
+  \caption{Confusion matrix of the LDA model fitted on the full training set and evaluated on the full test data (all five phonemes).}
+  \label{tab:lda_full_confusion_matrix}
+\end{table}
+
+\subsection*{1f)}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ccc}
+    \hline
+    Threshold $t$ & Train accuracy & Test accuracy \\ \hline
+    0.1 & 0.8302 & 0.7631 \\
+    0.2 & 0.8732 & 0.7563 \\
+    0.3 & 0.8897 & 0.7699 \\
+    0.4 & 0.9069 & 0.7517 \\
+    0.5 & 0.9069 & 0.7563 \\
+    0.6 & 0.9022 & 0.7472 \\
+    0.7 & 0.8803 & 0.7472 \\
+    0.8 & 0.8451 & 0.7403 \\
+    0.9 & 0.8114 & 0.6902 \\ \hline
+  \end{tabular}
+  \caption{Train and test accuracy of the logistic regression model on the two-class subset (aa and ao) for different classification thresholds.}
+  \label{tab:accuracy_thresholds}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{"../src/accuracy_vs_threshold_task1f.pdf"}
+  \caption{Train and test accuracy of the logistic regression model on the two-class subset (aa and ao) as a function of the classification threshold.}
+  \label{fig:accuracy_vs_threshold}
 \end{figure}
 
-% example table
-\begin{table}[ht]
+\begin{table}[H]
   \centering
-  \resizebox{\textwidth}{!}{%
-    \begin{tabular}{lccccc}
-      \hline
-      & Linear model & Interactions only & Log transformation & Square root transformation & Squared transformation \\ \hline
-      $R^2$ & 0.821 & 0.865 & 0.866 & 0.867 & 0.869 \\ \hline
-      cylinders & 0.128 & 0.591 & 0.433 & 0.378 & 0.266 \\
-      displacement & 0.008 & 0.124 & 0.009 & 0.004 & 0.004 \\
-      horsepower & 0.220 & 0.002 & $4.681 \times 10^{-4}$ & $2.211 \times 10^{-4}$ & $2.866 \times 10^{-5}$ \\
-      weight & $7.875 \times 10^{-21}$ & 0.963 & 0.630 & 0.580 & 0.609 \\
-      acceleration & 0.415 & 0.111 & 0.287 & 0.338 & 0.426 \\
-      year & $3.056 \times 10^{-39}$ & $2.015 \times 10^{-20}$ & $1.403 \times 10^{-20}$ & $1.589 \times 10^{-20}$ & $3.824 \times 10^{-20}$ \\
-      origin & $4.666 \times 10^{-7}$ & 0.002 & 0.029 & 0.044 & 0.063 \\
-      displacement (transformed) & -- & -- & 0.033 & 0.009 & $3.976 \times 10^{-4}$ \\
-      cylinders:weight & -- & $9.321 \times 10^{-12}$ & 0.006 & 0.016 & 0.019 \\
-      cylinders:year & -- & 0.149 & 0.187 & 0.187 & 0.156 \\
-      weight:year & -- & 0.137 & 0.112 & 0.114 & 0.145 \\ \hline
-    \end{tabular}
-  }
-  \caption{Comparison of $R^2$ values and predictor p-values across the linear model without interactions or transformations, the model with interactions only, and the three models with a transformation of displacement. In the transformed models, the row ``displacement'' is the original term and ``displacement (transformed)'' the added one.}
-  \label{tab:transformation_comparison}
+  \begin{tabular}{lcc@{\hspace{3em}}lcc@{\hspace{3em}}lcc}
+    \hline
+    \multicolumn{3}{c}{$t = 0.1$} & \multicolumn{3}{c}{$t = 0.2$} & \multicolumn{3}{c}{$t = 0.3$} \\
+    & aa & ao & & aa & ao & & aa & ao \\
+    aa & 90 & 18 & aa & 98 & 29 & aa & 109 & 34 \\
+    ao & 86 & 245 & ao & 78 & 234 & ao & 67 & 229 \\ \hline
+    \multicolumn{3}{c}{$t = 0.4$} & \multicolumn{3}{c}{$t = 0.5$} & \multicolumn{3}{c}{$t = 0.6$} \\
+    & aa & ao & & aa & ao & & aa & ao \\
+    aa & 111 & 44 & aa & 121 & 52 & aa & 124 & 59 \\
+    ao & 65 & 219 & ao & 55 & 211 & ao & 52 & 204 \\ \hline
+    \multicolumn{3}{c}{$t = 0.7$} & \multicolumn{3}{c}{$t = 0.8$} & \multicolumn{3}{c}{$t = 0.9$} \\
+    & aa & ao & & aa & ao & & aa & ao \\
+    aa & 126 & 61 & aa & 132 & 70 & aa & 139 & 99 \\
+    ao & 50 & 202 & ao & 44 & 193 & ao & 37 & 164 \\ \hline
+  \end{tabular}
+  \caption{Confusion matrices of the logistic regression model on the two-class test data (aa and ao) for each classification threshold. In each matrix the rows give the predicted class and the columns the actual class.}
+  \label{tab:confusion_matrices_thresholds}
 \end{table}
 
 \newpage

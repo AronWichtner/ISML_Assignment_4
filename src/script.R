@@ -134,7 +134,7 @@ print(cm_lda_full)
 
 # f)
 
-thresholds <- seq(0.2, 0.8, by = 0.1)
+thresholds <- seq(0.1, 0.9, by = 0.1)
 
 results <- data.frame(
     threshold = thresholds,
