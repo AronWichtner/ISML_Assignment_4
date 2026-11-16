@@ -78,7 +78,7 @@
 Table \ref{tab:data_sizes} shows a comparison of the different dataset sizes.
 After splitting the data into training and test set, the training set had 3340 observations whereas the test set had 1169 observations.
 After getting rid of all observations which did not have a response value "aa" or "ao" the number of observations decreased to 1278 and 439 for the training and test set respectively.
-The number of columns was 257 in all datasets. The columns did not inlcude "speaker" or "row number". 
+The number of columns was 257 in all datasets. The columns did not include "speaker" or "row number". 
 
 \begin{table}[H]
   \centering
@@ -96,12 +96,10 @@ The number of columns was 257 in all datasets. The columns did not inlcude "spea
 
 \subsection*{1b)}
 
-- removing all observations but the ones with response aa and ao implies that the model is doing simple log reg with only 2 classes.
-- A trehshold of 0.5 means that the predicted probabilites are mapped to ao if larger then 0.5 and mapped to aa if smaller.
-- the accuracy describes the fraction of all correctly predicted classes
-- the train acc with 0.9069 is very high whereas the test acc is lower with 0.7563 see table \ref{tab:logistic_regression_accuracy}
-- difference of 0.9069 - 0.7563 = 0.15
-- It is larger because the model was trained on that data and also trained to fit the noise -> overfitted
+The restriction to the response values aa and ao turns the task into a binary classification with two classes.
+With a classification threshold of 0.5, predicted probabilities above 0.5 are mapped to ao and all others to aa; the accuracy is the fraction of correctly classified observations.
+As Table \ref{tab:logistic_regression_accuracy} shows, the training accuracy of 0.9069 is clearly higher than the test accuracy of 0.7563 (difference of 0.15).
+This gap indicates overfitting: the model was fitted on the training data and also fits its noise, which does not carry over to the test data.
 
 \begin{table}[H]
   \centering
@@ -116,11 +114,8 @@ The number of columns was 257 in all datasets. The columns did not inlcude "spea
 
 \subsection*{1c)}
 
-- see table \ref{tab:lda_accuracy}
-- train acc decreses
-- trest acc increases
-- LDA generalizes slightly better here
--  the train-test gap shrinks
+Repeating the analysis with LDA (Table \ref{tab:lda_accuracy}) gives a slightly lower training accuracy of 0.8936 and a higher test accuracy of 0.7859; the train-test gap shrinks compared to (b).
+So LDA generalizes slightly better here.
 
 \begin{table}[H]
   \centering
@@ -135,13 +130,10 @@ The number of columns was 257 in all datasets. The columns did not inlcude "spea
 
 \subsection*{1d)}
 
-- confusion matrix (see \ref{tab:confusion_matrices_aa_ao}) shows which prediction values were classified correctly and which wrong.
-- It shows the TP, FP, FN and TN.
-- deviatioins from the diagonal generally speak agianst the model.
-- Positive means aa, negative means ao
-- Log reg and lda both predicted the same amount of TP 121 and FN 55
-- LDA predicted less FP 39 and more TN 224
-- difference overall small
+The confusion matrices in Table \ref{tab:confusion_matrices_aa_ao} show which predictions are correct and which are wrong; with aa as the positive class, the cells are the TP, FP, FN and TN, and deviations from the diagonal are misclassifications.
+Both models perform identically on the aa class (TP = 121, FN = 55).
+The small differences concern the ao class: LDA has fewer false positives (39 vs. 52) and more true negatives (224 vs. 211), i.e. it misclassifies fewer actual-ao observations as aa.
+Overall the difference is small: only 13 of 439 test observations are classified differently (test accuracy 0.7859 vs. 0.7563).
 
 \begin{table}[H]
   \centering
@@ -166,13 +158,10 @@ The number of columns was 257 in all datasets. The columns did not inlcude "spea
 
 \subsection*{1e)}
 
-- lda model trained on all phonemes means there are now more then two classes
-- train acc 0.944  and test acc 0.9196 \ref{tab:lda_full_accuracy} are a lot better especially the test accuracy -> why?
-- confusion matrix shows better prediction for aa and similar prediction for ao but ao/aa is still the main error source
-- other phenomes very well predicted 
-- reasons are:
-- more trainin data (3340 vs 1278) -> model can learn data better
-- other classes are easier to predict and their good predictions inflaste the accuracy
+The LDA model is now fitted on all five phonemes, so it has to distinguish more than two classes.
+The accuracies in Table \ref{tab:lda_full_accuracy} (train 0.944, test 0.9196) are clearly higher than for the two-class model from (c), especially on the test set.
+The confusion matrix (Table \ref{tab:lda_full_confusion_matrix}) shows that aa is predicted better (129 vs. 121 correct) and ao about equally well (223 vs. 224 correct), while the aa/ao boundary remains the dominant error source (86 of the 94 test errors); the other phonemes are predicted almost perfectly (recall of at least 0.97).
+The main reasons for the differences are the much larger training data set (3340 vs. 1278 observations) and the three additional classes, which are easy to separate, so their near-perfect predictions inflate the overall accuracy compared with the harder two-class task.
 
 \begin{table}[H]
   \centering
@@ -202,29 +191,25 @@ The number of columns was 257 in all datasets. The columns did not inlcude "spea
 
 \subsection*{1f)}
 
-- table \ref{tab:accuracy_thresholds} shows different accuracy values for test and train datset using differnt thresholds
-- models were trained only with two classes aa ao 
-- if the probabilite > t -> classfiy as ao
-- if the probabilite < t -> classfiy as aa
-- train accuracy initially at 0.8302 rising until 0.9069 with a t of 0.4, then dropping again until 0.8114
-- test accuracy tends to decrease slighly and drops hard with t of 0.9 but overal steady
-- accuracy generally can be biased if there is more ao then aa in the data
-  - train subset: aa 519 / ao 759 (40.6% / 59.4%)
-  - test subset: aa 176 / ao 263 (40.1% / 59.9%)
-  - ao is the majority class; always predicting ao already gives 59.9% test accuracy, so accuracy is biased but only litte
+Table \ref{tab:accuracy_thresholds} shows the train and test accuracy of the logistic regression model from (b), which was trained on the two classes aa and ao, for different thresholds from 0.1 to 0.9; Figure \ref{fig:accuracy_vs_threshold} plots the same values.
+A predicted probability above t is classified as ao, everything else as aa.
+The training accuracy rises from 0.8302 at t = 0.1 to 0.9069 at t = 0.4 and 0.5, and decreases again to 0.8114 at t = 0.9.
+The test accuracy stays fairly steady between 0.7403 and 0.7699 for t up to 0.8 and drops clearly only at t = 0.9 (0.6902).
 
-- \ref{tab:confusion_matrices_thresholds} shows a confusion matrix for each threshold.
-- with increasing treshold the number of correct ao classifications decrease whereas the number of correct aa classifications increases
-- even tough the accuracy does not show a huge difference with different trhesholds here we can see a substantial difference between thresholds f.e. t = 2 and t = 8
-- the reason for this is that the accuracy is the sum over the diagonal devided by total. With different trhesholds this sum stays roughly the same but errors are traded between the calsses
+The counts show that the data are imbalanced: the training subset contains 519 aa and 759 ao observations (40.6\% / 59.4\%), the test subset 176 aa and 263 ao (40.1\% / 59.9\%).
+Since ao is the majority class, always predicting ao already gives a test accuracy of 59.9\%, so the plain accuracy is biased toward ao.
+The model's accuracies from 0.69 to 0.77 are clearly above this trivial baseline nevertheless.
 
-- Conclusion sentence: the threshold has a **moderate** impact 
-- 0.5 is a good default where both classes have the same amount of error.
-- not a big effect on test accuracy only extreme thresholds (0.9, and 0.1 for train) clearly degrade it; 
-- but big moderate effect on confusion matrix -> trade off of the error between the two clases
+Table \ref{tab:confusion_matrices_thresholds} shows a confusion matrix for every threshold.
+With increasing t, the number of correctly classified ao observations decreases (245 to 164) while the number of correctly classified aa observations increases (90 to 139), so the errors are traded between the two classes.
+Even though the accuracy varies only little up to t = 0.8 (within about three percentage points), the confusion matrices differ substantially, for example between t = 0.2 and t = 0.8.
+The reason is that the accuracy is only the sum of the diagonal divided by the total number of observations: moving the threshold keeps this sum roughly constant but shifts the off-diagonal errors from one type to the other.
+
+Overall, the threshold has a moderate impact: t = 0.5 is a sensible default at which the two error types are almost balanced (52 vs. 55), and only extreme thresholds clearly degrade the accuracy (t = 0.9 on the test data, and t = 0.1 as well as t = 0.9 on the training data).
+Its main effect is the trade-off between the two error types, which is visible in the strongly differing confusion matrices.
 
 
-begin{table}[H]
+\begin{table}[H]
   \centering
   \begin{tabular}{ccc}
     \hline

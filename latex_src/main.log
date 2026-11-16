@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.22)  16 NOV 2026 15:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.22)  16 NOV 2026 15:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -852,161 +852,35 @@ Overfull \hbox (10.95003pt too wide) in paragraph at lines 71--72
 [][] 
  []
 
-
-LaTeX Warning: Reference `tab:data_sizes' on page 1 undefined on input line 78.
-
-
-LaTeX Warning: Reference `tab:logistic_regression_accuracy' on page 1 undefined on input line 102.
-
-
-LaTeX Warning: Reference `tab:lda_accuracy' on page 1 undefined on input line 119.
-
-
-LaTeX Warning: Reference `LastPage' on page 1 undefined on input line 135.
-
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-
-LaTeX Warning: Reference `tab:confusion_matrices_aa_ao' on page 2 undefined on input line 138.
-
-
-LaTeX Warning: Reference `tab:lda_full_accuracy' on page 2 undefined on input line 170.
-
-
-LaTeX Warning: Reference `tab:accuracy_thresholds' on page 2 undefined on input line 205.
-
-
-LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 215.
-
-[2]
-
-LaTeX Warning: Reference `tab:confusion_matrices_thresholds' on page 3 undefined on input line 216.
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:242: Undefined control sequence.
-<argument> g__tocbasic_\@captype 
-                                 _caption_above_bool
-l.242 ...for different classification thresholds.}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:242: Undefined control sequence.
-<argument> g__tocbasic_\@captype 
-                                 _caption_above_bool
-l.242 ...for different classification thresholds.}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:242: LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.242 ...for different classification thresholds.}
-                                                  
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:244: Too many }'s.
-\@endfloatbox ...pagefalse \outer@nobreak \egroup 
-                                                  \color@endbox 
-l.244 \end{table}
-                 
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:244: Extra \endgroup.
-\color@endgroup ->\endgraf \@endpefalse \endgroup 
-                                                  
-l.244 \end{table}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:244: Too many }'s.
-\color@endbox ->\color@endgroup \egroup 
-                                        
-l.244 \end{table}
-                 
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:244: LaTeX Error: \begin{document} ended by \end{table}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.244 \end{table}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-/home/aron/Documents/Uni/Master/Statistical Machinge Learning/Assignments/Assignment 4/latex_src/main.tex:244: Extra \endgroup.
-\end  ...end#1\endcsname \@checkend {#1}\endgroup 
-                                                  \UseHook {env/#1/after}\if...
-l.244 \end{table}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-<../src/accuracy_vs_threshold_task1f.pdf, id=28, 578.16pt x 433.62pt>
+] [2]
+<../src/accuracy_vs_threshold_task1f.pdf, id=36, 578.16pt x 433.62pt>
 File: ../src/accuracy_vs_threshold_task1f.pdf Graphic file (type pdf)
 <use ../src/accuracy_vs_threshold_task1f.pdf>
-Package pdftex.def Info: ../src/accuracy_vs_threshold_task1f.pdf  used on input line 248.
+Package pdftex.def Info: ../src/accuracy_vs_threshold_task1f.pdf  used on input line 233.
 (pdftex.def)             Requested size: 341.43437pt x 256.07178pt.
-
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 273.
-
-[3 <../src/accuracy_vs_threshold_task1f.pdf>]
-
-LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 274.
-
-[4]
-
-LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 277.
-
-[5] 
+ [3] [4 <../src/accuracy_vs_threshold_task1f.pdf>] [5] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package lastpage Warning: Rerun to get the references right on input line 277.
-
  ) 
 Here is how much of TeX's memory you used:
- 28184 strings out of 469514
- 533216 string characters out of 5470071
+ 28183 strings out of 469514
+ 533199 string characters out of 5470071
  1066102 words of memory out of 5000000
- 56379 multiletter control sequences out of 15000+600000
- 634621 words of font info for 66 fonts, out of 8000000 for 9000
+ 56378 multiletter control sequences out of 15000+600000
+ 634313 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 108i,11n,107p,11333b,477s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (5 pages, 83496 bytes).
+ 108i,11n,107p,11333b,475s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on main.pdf (5 pages, 75132 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 500000)
+ 85 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
+ 15 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
