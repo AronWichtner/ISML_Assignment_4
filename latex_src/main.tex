@@ -259,4 +259,74 @@ Its main effect is the trade-off between the two error types, which is visible i
 \newpage
 \section*{2}
 
+
+
+\subsection*{a)}
+
+\begin{align*}
+& n_A = 12, \; n_B=8 && \pi_A= \tfrac{12}{20} = 0.6, \; \pi_B=1-\pi_A = 0.4 \\[1em]
+& k=A,\ a = T && k=A,\ a = F \\
+& \theta_{AX_1T} = \tfrac{9}{12} = 0.75 && \theta_{AX_1F} = \tfrac{3}{12} = 0.25 \\
+& \theta_{AX_2T} = \tfrac{6}{12} = 0.5 && \theta_{AX_2F} = \tfrac{6}{12} = 0.5 \\
+& \theta_{AX_3T} = \tfrac{3}{12} = 0.25 && \theta_{AX_3F} = \tfrac{9}{12} = 0.75 \\[1em]
+& k=B,\ a=T && k=B,\ a=F \\
+& \theta_{BX_1T} = \tfrac{5}{8} = 0.625 && \theta_{BX_1F} = \tfrac{3}{8} = 0.375 \\
+& \theta_{BX_2T} = \tfrac{5}{8} = 0.625 && \theta_{BX_2F} = \tfrac{3}{8} = 0.375 \\
+& \theta_{BX_3T} = \tfrac{6}{8} = 0.75 && \theta_{BX_3F} = \tfrac{2}{8} = 0.25
+\end{align*}
+
+\subsection*{b)}
+
+For the new patients we use the Naive Bayes classifier. The posterior is
+\begin{align*}
+P(Y = k|X_1, X_2, X_3) &= \frac{P(Y=k)\prod_{i=1}^{p}P(X_i|Y=k)}
+{\sum_{k'} P(Y=k')\prod_{i=1}^{p}P(X_i|Y=k')} = \frac{S_k}{S_A + S_B}, \\[0.5em]
+\text{with}\quad S_k &= \pi_k \prod_{i=1}^{p}P(X_i|Y=k).
+\end{align*}
+
+\textbf{Patient 21:} $X=(F,T,F)$
+\begin{align*}
+S_{A,21} &= \pi_A \cdot P(X_1=F|A) \cdot P(X_2=T|A) \cdot P(X_3=F|A) = 0.6 \cdot 0.25 \cdot 0.5 \cdot 0.75 = 0.056 \\
+S_{B,21} &= \pi_B \cdot P(X_1=F|B) \cdot P(X_2=T|B) \cdot P(X_3=F|B) = 0.4 \cdot 0.375 \cdot 0.625 \cdot 0.25 = 0.023 \\[0.5em]
+P(Y=A|X) &= \frac{0.056}{0.056+0.023} = 0.71 \\
+P(Y=B|X) &= 1- P(Y=A|X) = 0.29
+\end{align*}
+For patient 21 we obtain a probability of 71\% for class A, so we can be fairly confident in deciding for A.
+\vspace{5mm}
+
+\textbf{Patient 22:} $X=(F,T,?)$
+
+The value of $X_3$ is missing, so we leave this factor out of the product.
+\begin{align*}
+S_{A,22} &= 0.6 \cdot 0.25 \cdot 0.5 = 0.075 \\
+S_{B,22} &= 0.4 \cdot 0.375 \cdot 0.625 = 0.093 \\[0.5em]
+P(Y=A|X) &= \frac{0.075}{0.075+0.093} = 0.44 \\
+P(Y=B|X) &= 1- P(Y=A|X) = 0.56
+\end{align*}
+The probability drops considerably and the decision switches to B with only 56\%. This is so close to a coin flip that we cannot speak of a certain decision.
+
+\subsection*{c)}
+\begin{align*}
+& |\mathrm{dom}(Y)| =|\mathrm{dom}(X_i)| = 2 && \pi_A = \frac{12+1}{20+2} = 0.591\,,\; \pi_B = 0.409 \\[1em]
+& k=A,\ a = T && k=A,\ a = F \\
+& \theta_{AX_1T} = \tfrac{9+1}{12+2} = 0.71 && \theta_{AX_1F} = \tfrac{4}{14} = 0.286 \\
+& \theta_{AX_2T} = \tfrac{7}{14} = 0.5 && \theta_{AX_2F} = \tfrac{7}{14} = 0.5 \\
+& \theta_{AX_3T} = \tfrac{4}{14} = 0.29 && \theta_{AX_3F} = \tfrac{10}{14} = 0.71 \\[1em]
+& k=B,\ a=T && k=B,\ a=F \\
+& \theta_{BX_1T} = \tfrac{6}{10} = 0.6 && \theta_{BX_1F} = \tfrac{4}{10} = 0.4 \\
+& \theta_{BX_2T} = \tfrac{6}{10} = 0.6 && \theta_{BX_2F} = \tfrac{4}{10} = 0.4 \\
+& \theta_{BX_3T} = \tfrac{7}{10} = 0.7 && \theta_{BX_3F} = \tfrac{3}{10} = 0.3
+\end{align*}
+
+All estimated values get a little closer towards 0.5. For example 0.25 becomes 0.286, and 0.75 becomes 0.71
+The effects stay rather small. This is because we dont have values near 0 or 1. The effect on those small und large numbers is bigger usually. 
+The probabilitys for the new IDs in b) change a bit in 21 from 0.706 to 0.672 and in 22 from 0.44 to 0.46.
+
+\subsection*{d)}\vspace{2mm}
+$$\theta_{kia} = \frac{n_{kia}}{\sum_{a\in \mathrm{dom}(X_i)}n_{kia}} $$
+If we take away the values of $X_2$ in id 10 and 20, we would take away two F instances for the class B. That leaves us with only one F instance in $X_2$ for B, the value $\theta_{BX_2F}$ would be newly calculated by:
+$$\theta_{BX_2F} = \frac{1}{6} = 0.166 $$
+So the value of the parameter $\theta_{BX_2F}$ reduces from 0.375 to 0.166.
+
+
 \end{document}
